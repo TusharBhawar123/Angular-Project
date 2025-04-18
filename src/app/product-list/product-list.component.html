@@ -1,0 +1,27 @@
+<div *ngIf="loading" class="spinner-wrapper">
+    <p-progressSpinner></p-progressSpinner>
+  </div>
+  
+  <div *ngIf="!loading">
+    <p-table [value]="products" [paginator]="true" [rows]="5" responsiveLayout="scroll">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Image</th>
+          <th>Title</th>
+          <th>Price</th>
+          <th>Category</th>
+          <th>Actions</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-product>
+        <tr>
+          <td><img [src]="product.image" width="50" /></td>
+          <td>{{ product.title }}</td>
+          <td>{{ product.price | currency }}</td>
+          <td>{{ product.category }}</td>
+          <td><a [routerLink]="['/product-detail', product.id]">View</a></td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+  

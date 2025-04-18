@@ -1,0 +1,32 @@
+<div *ngIf="loading" class="spinner-wrapper">
+  <p-progressSpinner></p-progressSpinner>
+</div>
+
+<div *ngIf="!loading" class="card-wrapper">
+  <p-card header="{{ product.title }}" styleClass="product-card">
+    <div class="card-content">
+      <img [src]="product.image" alt="{{ product.title }}" width="150" />
+      <p>{{ product.description }}</p>
+      <h3>{{ product.price | currency }}</h3>
+      <p><strong>Category:</strong> {{ product.category }}</p>
+
+      <!-- 🔘 Buy Now Button -->
+      <button pButton type="button" label="Buy Now" icon="pi pi-shopping-cart"
+              class="p-button-success mt-3"
+              (click)="buyNow()">
+      </button>
+    </div>
+  </p-card>
+</div>
+
+<!-- 🪟 Dialog -->
+<p-dialog *ngIf="product" header="Confirm Purchase" [(visible)]="showDialog" [modal]="true" [style]="{width: '350px'}">
+  <div class="text-center">
+    <img [src]="product.image" alt="{{ product.title }}" width="100" class="mb-2" />
+    <h3>{{ product.title }}</h3>
+    <p><strong>Category:</strong> {{ product.category }}</p>
+    <p><strong>Price:</strong> {{ product.price | currency }}</p>
+
+    <button pButton label="Confirm" icon="pi pi-check" class="p-button-sm p-button-primary mt-3" (click)="showDialog = false"></button>
+  </div>
+</p-dialog>
